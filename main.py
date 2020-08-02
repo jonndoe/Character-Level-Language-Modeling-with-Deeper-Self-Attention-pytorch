@@ -86,6 +86,9 @@ class AverageMeter(object):
 import os
 import hashlib
 fn = 'corpus.{}.data'.format(hashlib.md5(args.data.encode()).hexdigest())
+
+print('fn is:', fn)
+
 if os.path.exists(fn):
     print('Loading cached dataset...')
     corpus = torch.load(fn)
@@ -129,6 +132,16 @@ test_data = batchify(corpus.test, test_batch_size)
 ###############################################################################
 
 vocab_size = len(corpus.dictionary)
+
+print(corpus.dictionary.counter)
+print(corpus.dictionary.__module__)
+print(corpus.dictionary.__len__())
+print(corpus.dictionary.__doc__)
+print(corpus.dictionary.total)
+
+
+
+
 model = next_char_transformer(vocab_size, hidden_size=args.hidden_size, n_layers=args.n_layers,
                               dropout=args.dropout, tied=args.tied, max_sequence_len=args.bptt,
                               intermediate_losses=True).to(device)

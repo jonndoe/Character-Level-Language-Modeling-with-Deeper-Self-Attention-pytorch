@@ -33,12 +33,18 @@ class Corpus(object):
 
     def tokenize(self, path):
         """Tokenizes a text file."""
+        # Split file line by line, count words(tokens) in each line.
         assert os.path.exists(path)
         # Add words to the dictionary
         with open(path, 'r') as f:
             tokens = 0
             for line in f:
+
+                # create list [] structure filled with words, add <eos> at the last element of list
                 words = line.split() + ['<eos>']
+
+                print('words :', words)
+
                 tokens += len(words)
                 for word in words:
                     self.dictionary.add_word(word)
